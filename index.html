@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nikolai Hansli | Jazz Pianist</title>
+<meta name="description" content="Nikolai Hansli, jazzpianist, komponist og arrangør fra Bærum. Student ved Jazzlinja ved NTNU.">
+<meta name="theme-color" content="#17120e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317120e'/%3E%3Crect x='6' y='6' width='4' height='20' fill='%23fff'/%3E%3Crect x='12' y='6' width='4' height='20' fill='%23fff'/%3E%3Crect x='18' y='6' width='4' height='20' fill='%23fff'/%3E%3Crect x='9' y='6' width='3' height='12' fill='%23b8863b'/%3E%3Crect x='15' y='6' width='3' height='12' fill='%23b8863b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<script>
+(function () {
+  try {
+    if (!sessionStorage.getItem('nh-loaded') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('show-loader');
+      sessionStorage.setItem('nh-loaded', '1');
+    }
+  } catch (e) {}
+})();
+</script>
+<style>
+:root {
+  --ink: #17120e;
+  --accent: #9a6b22;
+  --accent-hover: #825a1c;
+  --accent-soft: #e2c28a;
+  --bg: #e9e2d6;
+  --card: #ffffff;
+  --text: #413a33;
+  --muted: #6a6159;
+  --line: rgba(23,18,14,.2);
+  --ease: cubic-bezier(.22,1,.36,1);
+  --font-ui: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-brand: "Cormorant Garamond", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; scroll-snap-type: y proximity; } }
+#hero { scroll-snap-align: start; }
+body { margin: 0; font-family: var(--font-ui); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 1.02rem; }
+a { color: var(--accent); text-decoration: none; transition: color .25s var(--ease), opacity .25s var(--ease); }
+::selection { background: rgba(226,194,138,.55); color: var(--ink); }
+main, footer { transition: opacity .2s ease; }
+body.swap main, body.swap footer { opacity: 0; }
+h1, h2, h3 { color: var(--ink); line-height: 1.2; }
+img { max-width: 100%; height: auto; }
+.container { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, li:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.skip-link { position: absolute; top: -100%; left: 0; z-index: 2000; padding: .85rem 1.5rem; background: var(--ink); color: #fff; font-weight: 600; border-radius: 0 0 .5rem 0; }
+.skip-link:focus { top: 0; }
+
+/* Loader */
+.loader { display: none; position: fixed; inset: 0; z-index: 9999; touch-action: none; cursor: pointer; }
+html.show-loader .loader, .loader.opening { display: block; }
+.loader.opening { pointer-events: none; }
+html.show-loader, html.show-loader body { overflow: hidden; }
+.curtain { position: absolute; top: 0; bottom: 0; width: 50.5%; background: linear-gradient(180deg, #2a211a 0%, #1b1510 55%, #0e0b08 100%); transition: transform .6s cubic-bezier(.77,0,.18,1); }
+.curtain.left { left: 0; }
+.curtain.right { right: 0; }
+.loader.opening .curtain.left { transform: translateX(-102%); }
+.loader.opening .curtain.right { transform: translateX(102%); }
+.loader-mid { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.2rem; }
+.loader.opening .loader-mid { opacity: 0; transition: opacity .3s ease; }
+.l-stage { position: relative; width: min(320px, 78vw); height: 200px; }
+.l-notes { position: absolute; left: 0; right: 0; top: 0; height: 110px; }
+.l-note { position: absolute; bottom: 0; font-size: 2rem; color: var(--accent-soft); opacity: 0; transform: translateY(20px) scale(.6); }
+.l-note.show { animation: noteUp .5s ease-out forwards; }
+@keyframes noteUp { 0% { opacity: 0; transform: translateY(20px) scale(.6); } 25% { opacity: 1; } 100% { opacity: 1; transform: translateY(-30px) scale(1); } }
+.l-keys { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; display: flex; }
+.l-key { position: relative; flex: 1; background: #f7f4ef; border: 1px solid #1d1713; border-top: 0; border-radius: 0 0 5px 5px; transition: background .1s, transform .1s; }
+.l-key.on { background: linear-gradient(180deg,#f0d9a8,#d9b46a); transform: translateY(3px); }
+.l-black { position: absolute; top: 0; height: 56%; width: 9%; background: #0b0806; border-radius: 0 0 3px 3px; z-index: 2; transform: translateX(-50%); transition: background .1s; }
+.l-black.on { background: #b8863b; }
+.l-name { font-family: var(--font-brand); font-weight: 700; letter-spacing: .3em; color: var(--accent-soft); font-size: 1rem; text-transform: uppercase; }
+.loader.falling .l-key, .loader.falling .l-black, .loader.falling .l-note { animation: none; transition: transform .5s cubic-bezier(.5,0,1,.6) var(--d), opacity .45s ease var(--d); opacity: 0; }
+.loader.falling .l-key, .loader.falling .l-note { transform: translateY(70vh) rotate(var(--r)); }
+.loader.falling .l-black { transform: translate(-50%, 70vh) rotate(var(--r)); }
+.loader.falling .l-name { transition: opacity .5s ease; opacity: 0; }
+
+/* Navbar */
+#navbar { position: fixed; top: 0; width: 100%; z-index: 1030; transition: background-color .3s ease, box-shadow .3s ease; }
+#navbar.scrolled { background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 4.5rem; }
+.brand { font-family: var(--font-brand); font-weight: 700; letter-spacing: .14em; font-size: 1.25rem; color: #fff; transition: color .3s ease; }
+#navbar.scrolled .brand { color: var(--ink); }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0 0 0 auto; padding: 0; }
+.nav-links a { position: relative; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.9); padding: .3rem 0; transition: color .2s ease; }
+#navbar.scrolled .nav-links a { color: var(--ink); }
+.nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--accent-soft); transition: width .2s ease; }
+#navbar.scrolled .nav-links a::after { background: var(--accent); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: .5rem; margin-left: 1.8rem; position: relative; z-index: 1051; }
+.lang { display: inline-flex; border: 1px solid rgba(255,255,255,.6); border-radius: 999px; padding: 2px; transition: border-color .3s; }
+.lang button { border: 0; background: transparent; color: rgba(255,255,255,.85); font: 700 .72rem/1 var(--font-ui); letter-spacing: .08em; padding: .42rem .7rem; border-radius: 999px; cursor: pointer; transition: background-color .2s, color .2s; }
+.lang button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+#navbar.scrolled .lang { border-color: var(--ink); }
+#navbar.scrolled .lang button { color: var(--ink); }
+#navbar.scrolled .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+body.nav-open .lang { border-color: rgba(255,255,255,.6); }
+body.nav-open .lang button, body.nav-open #navbar.scrolled .lang button { color: rgba(255,255,255,.85); }
+body.nav-open .lang button[aria-pressed="true"], body.nav-open #navbar.scrolled .lang button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+.toggler { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.toggler span { display: block; width: 22px; height: 2px; border-radius: 2px; background: #fff; transition: transform .3s, opacity .2s, background-color .35s; }
+#navbar.scrolled .toggler span { background: var(--ink); }
+.toggler[aria-expanded="true"] span, #navbar.scrolled .toggler[aria-expanded="true"] span { background: #fff; }
+.toggler[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.toggler[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.toggler[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 900px) {
+  .toggler { display: flex; }
+  .brand { position: relative; z-index: 1051; }
+  body.nav-open { overflow: hidden; }
+  body.nav-open #navbar .brand, body.nav-open #navbar.scrolled .brand { color: #fff; }
+  .nav-links { position: fixed; inset: 0; z-index: 1040; background: var(--ink); flex-direction: column; justify-content: center; gap: 1.6rem; opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; margin: 0; }
+  .nav-links.open { opacity: 1; visibility: visible; }
+  .nav-links a, #navbar.scrolled .nav-links a { color: #fff; font-size: 1.1rem; }
+  .nav-right { margin-left: auto; }
+}
+
+/* Buttons */
+.btn { display: inline-block; padding: .7rem 1.5rem; border-radius: 999px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font-family: var(--font-ui); font-weight: 600; font-size: .95rem; cursor: pointer; transition: background-color .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease), transform .35s var(--ease); }
+.btn:active { transform: scale(.97); }
+.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-ghost { background: transparent; border-color: rgba(255,255,255,.7); }
+.btn-ghost:hover { background: #fff; border-color: #fff; color: var(--ink); }
+
+/* Hero */
+#hero { position: relative; isolation: isolate; min-height: 100vh; min-height: 100svh; padding: 7rem 0 5rem; background: var(--ink); display: flex; align-items: center; overflow: hidden; }
+#hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 50% 55% at 80% 35%, rgba(184,134,59,.28), rgba(184,134,59,0) 70%); }
+.hero-wrap { position: relative; }
+.hero-wrap > div { max-width: 31rem; }
+.hero-portrait { position: absolute; top: 1.5rem; right: 0; bottom: -5rem; width: 50%; z-index: -1; overflow: hidden; }
+.hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; display: block; filter: contrast(1.12) saturate(1.1) brightness(.95); transform-origin: 60% 30%; animation: heroIn 2.4s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes heroIn { from { transform: scale(1.12); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero-portrait img { animation: none; } }
+.hero-portrait::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light; background: radial-gradient(ellipse 60% 45% at 62% 28%, rgba(255,205,130,.55), rgba(255,205,130,0) 70%), radial-gradient(ellipse 120% 90% at 55% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,.75) 100%); }
+.hero-portrait::after { content: ""; position: absolute; inset: 0; z-index: 2; background:
+  linear-gradient(90deg, var(--ink) 0%, rgba(23,18,14,.65) 26%, rgba(23,18,14,0) 58%),
+  linear-gradient(0deg, var(--ink) 0%, rgba(23,18,14,0) 22%),
+  linear-gradient(180deg, rgba(23,18,14,.5) 0%, rgba(23,18,14,0) 22%); }
+@media (max-width: 820px) {
+  #hero { align-items: flex-end; padding: 6rem 0 5rem; }
+  .hero-portrait { width: 100%; }
+  .hero-portrait img { object-position: 50% 10%; }
+  .hero-portrait::after { background: linear-gradient(0deg, var(--ink) 0%, rgba(23,18,14,.9) 36%, rgba(23,18,14,.15) 68%, rgba(23,18,14,.45) 100%); }
+}
+.eyebrow { font-family: var(--font-brand); font-style: italic; font-weight: 500; font-size: 1.15rem; letter-spacing: .06em; color: var(--accent-soft); margin: 0 0 .8rem; }
+.hero-title { font-family: var(--font-brand); font-weight: 700; letter-spacing: .03em; color: #fff; font-size: clamp(2.8rem, 8vw, 4.8rem); margin: 0 0 1.2rem; line-height: 1.02; }
+.hero-lead { color: rgba(255,255,255,.78); font-size: 1.1rem; max-width: 29rem; margin: 0 0 2.2rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+/* Decorative key strip */
+.keys-strip { position: absolute; left: 0; right: 0; bottom: 0; height: 34px; display: flex; z-index: 1; pointer-events: none; }
+.keys-strip i { flex: 1; background: #f7f4ef; border-right: 1px solid rgba(23,18,14,.3); position: relative; }
+.keys-strip i.b::after { content: ""; position: absolute; top: 0; right: -.4em; width: .8em; height: 62%; background: var(--ink); border-radius: 0 0 3px 3px; z-index: 2; }
+.keys-strip i.nb::after { display: none; }
+
+/* Sections */
+section.band { padding: 6.5rem 0; }
+.section-head { margin-bottom: 2.6rem; }
+.section-head h2 { font-family: var(--font-brand); font-size: 2.3rem; margin: 0; font-weight: 700; letter-spacing: .02em; }
+.section-head h2::after { content: ""; display: block; width: 36px; height: 1px; margin-top: .7rem; background: var(--accent); }
+.meta { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+.tag { font-size: .74rem; padding: .05rem .7rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
+.go { margin-top: .4rem; font-weight: 600; font-size: .9rem; color: var(--accent); }
+
+/* Cards with jazz glyph corners */
+.card { position: relative; display: flex; flex-direction: column; gap: .5rem; padding: 2.4rem 2rem; background: var(--card); border: 1px solid rgba(23,18,14,.32); border-radius: .5rem; box-shadow: 0 10px 26px -18px rgba(23,18,14,.45); transition: border-color .4s var(--ease), transform .5s var(--ease), box-shadow .5s var(--ease), opacity 1s var(--ease); }
+.card:hover { border-color: var(--accent); box-shadow: 0 18px 38px -20px rgba(23,18,14,.5); }
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card h3 { margin: 0; font-family: var(--font-brand); font-size: 1.55rem; }
+.card p { margin: 0; font-size: .96rem; flex: 1; }
+.cg { transition: opacity .4s var(--ease), transform .4s var(--ease); position: absolute; font-family: var(--font-brand); font-style: italic; font-weight: 700; font-size: .78rem; letter-spacing: .03em; color: var(--accent); opacity: .5; line-height: 1; cursor: default; transition: opacity .25s; white-space: nowrap; }
+.card:hover .cg, .cg:hover { opacity: 1; }
+.card:hover .cg.tl { transform: translate(2px,2px); } .card:hover .cg.tr { transform: translate(-2px,2px); } .card:hover .cg.bl { transform: translate(2px,-2px); } .card:hover .cg.br { transform: translate(-2px,-2px); }
+.cg.tl { top: .8rem; left: .9rem; } .cg.tr { top: .8rem; right: .9rem; }
+.cg.bl { bottom: .8rem; left: .9rem; } .cg.br { bottom: .8rem; right: .9rem; }
+
+/* About */
+.about { display: grid; grid-template-columns: .85fr 1.15fr; gap: 4rem; align-items: center; }
+.about-photo { margin: 0; }
+.about-photo img { transition: transform 1.2s var(--ease); width: 100%; display: block; border-radius: .4rem; aspect-ratio: 4/5; object-fit: cover; object-position: 50% 30%; }
+.about-photo figcaption { font-size: .8rem; color: var(--muted); margin-top: .6rem; }
+.about-text p { margin: 0 0 1.1rem; font-size: 1.08rem; }
+.facts { list-style: none; margin: 1.8rem 0 0; padding: 0; border-top: 1px solid var(--ink); }
+.facts li { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--line); font-size: .93rem; }
+.facts b { color: var(--ink); font-weight: 600; }
+.facts span { text-align: right; }
+@media (max-width: 820px) { .about { grid-template-columns: 1fr; gap: 2rem; } }
+
+/* Listen + piano (dark): always fits one screen */
+#listen { background: var(--ink); color: rgba(255,255,255,.75); padding: 5rem 0 1.2rem; height: 100vh; height: 100svh; min-height: 560px; scroll-snap-align: start; }
+#listen .container { height: 100%; }
+.listen-wrap { display: flex; flex-direction: column; gap: clamp(.7rem, 2vh, 1.5rem); height: 100%; }
+#listen .section-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+#listen .section-head h2 { color: #fff; font-size: 1.8rem; }
+#listen .section-head h2::after { background: var(--accent-soft); margin-top: .35rem; }
+.lp-links { display: flex; gap: 1.2rem; font-size: .88rem; }
+.lp-links a { color: var(--accent-soft); transition: opacity .2s; }
+.lp-links a:hover { opacity: .7; }
+.listen { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(190px, 270px) 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: stretch; }
+.lp { display: flex; flex-direction: column; min-height: 0; }
+.lp-cover { display: block; width: min(100%, 25vh); height: auto; aspect-ratio: 1; object-fit: cover; border-radius: .4rem; transition: transform .6s var(--ease); }
+.lp:hover .lp-cover { transform: scale(1.015); }
+.lp-info .meta { color: var(--accent-soft); margin: .7rem 0 0; }
+.lp-info h3 { font-family: var(--font-brand); font-size: 1.7rem; margin: .1rem 0 0; color: #fff; }
+.lp-by { margin: 0; font-size: .88rem; color: rgba(255,255,255,.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lp-bar { display: flex; align-items: center; gap: .6rem; font-size: .72rem; font-variant-numeric: tabular-nums; margin-top: .9rem; color: rgba(255,255,255,.6); }
+.lp-bar input { flex: 1; accent-color: var(--accent-soft); height: 3px; min-width: 0; }
+.lp-ctrl { display: flex; align-items: center; gap: .8rem; margin: .4rem 0 0; }
+.lp-ctrl button { border: 0; background: transparent; color: #fff; font-size: 1.1rem; cursor: pointer; width: 38px; height: 38px; border-radius: 50%; transition: background-color .2s var(--ease), transform .2s var(--ease); }
+.lp-ctrl button:hover { background: rgba(255,255,255,.12); }
+.lp-ctrl button:active { transform: scale(.92); }
+.lp-ctrl .lp-main { width: 48px; height: 48px; background: var(--accent-soft); color: var(--ink); font-size: 1.1rem; }
+.lp-ctrl .lp-main:hover { background: #fff; }
+.tl { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.14); min-height: 0; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(5, minmax(46px, 1fr)); grid-auto-flow: column; column-gap: clamp(1.2rem, 3vw, 2.4rem); scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.2) transparent; }
+.tl li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: .1rem .7rem; align-items: center; padding: 0 .3rem; border-bottom: 1px solid rgba(255,255,255,.14); cursor: pointer; transition: background-color .3s var(--ease), padding-left .3s var(--ease); }
+.tl li:hover { background: rgba(255,255,255,.05); padding-left: .6rem; }
+.tl .n { color: rgba(255,255,255,.4); font-weight: 600; text-align: center; font-variant-numeric: tabular-nums; font-size: .85rem; }
+.tl li.on .n { display: none; }
+.tl .eq { display: none; justify-content: center; align-items: flex-end; gap: 2px; height: 14px; }
+.tl li.on .eq { display: flex; }
+.tl .eq i { width: 3px; background: var(--accent-soft); height: 30%; animation: eq .9s ease-in-out infinite; }
+.tl .eq i:nth-child(2) { animation-delay: .2s; } .tl .eq i:nth-child(3) { animation-delay: .4s; }
+.tl li:not(.playing) .eq i { animation-play-state: paused; }
+@keyframes eq { 0%,100% { height: 25%; } 50% { height: 100%; } }
+.tl .t { font-weight: 600; color: #fff; line-height: 1.25; font-size: .94rem; min-width: 0; transition: color .3s var(--ease); }
+.tl .t b { display: block; font-weight: inherit; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tl .a { display: block; font-weight: 400; font-size: .74rem; color: rgba(255,255,255,.42); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tl .time { color: rgba(255,255,255,.45); font-size: .8rem; font-variant-numeric: tabular-nums; }
+.tl li.on .t { color: var(--accent-soft); }
+
+.piano-wrap { flex: none; }
+.piano-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem 1.5rem; margin-bottom: .6rem; }
+.piano-head p { margin: 0; font-size: .8rem; color: rgba(255,255,255,.5); }
+.pill { font-size: .78rem; padding: .15rem .8rem; border-radius: 999px; border: 1px solid rgba(226,194,138,.4); color: var(--accent-soft); font-variant-numeric: tabular-nums; min-width: 4.5rem; text-align: center; flex: none; }
+.piano { position: relative; display: flex; height: clamp(92px, 19vh, 170px); border-bottom: 5px solid #2a1f16; user-select: none; touch-action: manipulation; }
+.pk { position: relative; flex: 1; border: 1px solid #1d1713; border-top: 0; border-radius: 0 0 5px 5px; cursor: pointer; display: flex; align-items: flex-end; justify-content: center; padding-bottom: .35rem; font-size: .64rem; font-weight: 700; color: #9c9186; background: linear-gradient(180deg,#fff 0%, #f1ece4 100%); overflow: hidden; transition: transform .12s var(--ease); }
+.pk::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,#f0d9a8,#d4a955); opacity: var(--i, 0); pointer-events: none; }
+.pk.down { transform: translateY(2px); }
+.pk.black { position: absolute; top: 0; height: 60%; transform: translateX(-50%); background: linear-gradient(180deg,#2d2620,#0b0806); border-color: #000; border-radius: 0 0 4px 4px; z-index: 2; color: #bba98f; flex: none; }
+.pk.black::before { background: linear-gradient(180deg,#d4a955,#8a5f1e); }
+.pk.black.down { transform: translateX(-50%) translateY(2px); }
+.pk span { position: relative; }
+
+@media (max-width: 900px) {
+  #listen { padding: 4.6rem 0 .9rem; }
+  #listen .section-head h2 { font-size: 1.45rem; }
+  .listen { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: .8rem; }
+  .lp { display: grid; grid-template-columns: 78px minmax(0, 1fr); column-gap: .9rem; align-items: center; }
+  .lp-cover { width: 78px; grid-row: 1 / span 3; }
+  .lp-info .meta, .lp-note { display: none; }
+  .lp-info { grid-column: 2; }
+  .lp-info h3 { font-size: 1.3rem; margin: 0; }
+  .lp-bar { grid-column: 2; margin-top: .3rem; }
+  .lp-ctrl { grid-column: 2; margin: 0; }
+  .lp-ctrl .lp-main { width: 42px; height: 42px; }
+  .lp-ctrl button { width: 34px; height: 34px; }
+  .tl { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; grid-auto-rows: minmax(30px, 1fr); }
+  .tl .a { display: none; }
+  .tl li { padding: 0 .2rem; }
+  .tl .t { font-size: .88rem; }
+  .piano { height: clamp(78px, 14vh, 120px); }
+  .piano-head { display: none; }
+  .brand { white-space: nowrap; font-size: 1.05rem; letter-spacing: .1em; }
+  .pk { font-size: .56rem; }
+}
+
+/* Selected work */
+.projects { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.4rem; }
+.projects .card:first-child { grid-column: 1 / -1; }
+@media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+
+/* How I play */
+#personality { background: #f3eee6; border-block: 1px solid var(--line); }
+.lead-quote { font-family: var(--font-brand); font-style: italic; font-weight: 500; font-size: clamp(1.5rem, 3.2vw, 2.2rem); line-height: 1.35; color: var(--ink); max-width: 44rem; margin: 0 0 3rem; }
+.traits { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; }
+.traits .card { padding: 2.4rem 1.4rem; background: #fff; }
+.traits h3 { font-size: 1.35rem; }
+.traits p { font-size: .9rem; }
+@media (max-width: 900px) { .traits { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px) { .traits { grid-template-columns: 1fr; } }
+
+/* Experience */
+.jobs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.jobs li { display: grid; grid-template-columns: 1fr auto; gap: .2rem 1.5rem; padding: 1.2rem .2rem; border-bottom: 1px solid var(--line); }
+.jobs h3 { margin: 0; font-size: 1.02rem; }
+.jobs .org { color: var(--muted); font-size: .9rem; }
+.jobs .when { grid-row: 1; grid-column: 2; color: var(--muted); font-size: .85rem; font-weight: 600; white-space: nowrap; }
+@media (max-width: 600px) { .jobs li { grid-template-columns: 1fr; } .jobs .when { grid-row: auto; grid-column: 1; } }
+
+/* Instagram */
+#instagram { background: #f3eee6; border-top: 1px solid var(--line); }
+.ig { display: grid; grid-template-columns: 1fr minmax(300px, 460px); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.ig-text .ig-handle { font-family: var(--font-brand); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--ink); margin: 0 0 .6rem; line-height: 1.1; max-width: none; }
+.ig-text p { margin: 0 0 1.6rem; font-size: 1.05rem; max-width: 26rem; }
+.btn-dark { background: var(--ink); border-color: var(--ink); }
+.btn-dark:hover { background: var(--accent); border-color: var(--accent); }
+.ig-frame { position: relative; border: 1px solid rgba(23,18,14,.32); border-radius: .6rem; overflow: hidden; background: var(--bg); min-height: 380px; box-shadow: 0 24px 50px -34px rgba(23,18,14,.5); transition: box-shadow .5s var(--ease), transform .5s var(--ease); }
+.ig-frame:hover { transform: translateY(-3px); box-shadow: 0 30px 56px -32px rgba(23,18,14,.55); }
+.ig-frame iframe { display: block; width: 100%; height: min(470px, 78vh); border: 0; position: relative; z-index: 1; background: transparent; }
+.ig-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; text-align: center; padding: 2rem; color: var(--muted); font-size: .9rem; z-index: 0; }
+.ig-fallback strong { font-family: var(--font-brand); font-size: 1.6rem; color: var(--ink); }
+@media (max-width: 820px) { .ig { grid-template-columns: 1fr; } .ig-text { text-align: left; } }
+
+.foot-keys { position: static; margin: 0 0 1.6rem; }
+footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); padding: 0 0 2rem; font-size: .88rem; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; }
+.foot a { color: var(--accent-soft); margin-left: 1.2rem; }
+.foot a:first-child { margin-left: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--rd, 0s); }
+  .reveal.in { opacity: 1; transform: none; }
+  .card.reveal.in { transition: border-color .4s var(--ease), transform .5s var(--ease), box-shadow .5s var(--ease); transition-delay: 0s; }
+  .card.reveal.in:hover { transform: translateY(-2px); }
+}
+</style>
+</head>
+<body>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="curtain left"></div><div class="curtain right"></div>
+  <div class="loader-mid">
+    <div class="l-stage"><div class="l-keys" id="l-keys"></div></div>
+    <div class="l-name">Nikolai Hansli</div>
+  </div>
+</div>
+<a class="skip-link" href="#main" data-en="Skip to content" data-no="Hopp til innhold">Skip to content</a>
+
+<header id="navbar">
+  <div class="container nav-inner">
+    <a class="brand" href="#hero">NIKOLAI HANSLI</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" data-en="About" data-no="Om meg">About</a></li>
+      <li><a href="#listen" data-en="Listen" data-no="Lytt">Listen</a></li>
+      <li><a href="#repertoire" data-en="Work" data-no="Prosjekter">Work</a></li>
+      <li><a href="#experience" data-en="Experience" data-no="Erfaring">Experience</a></li>
+      <li><a href="#instagram">Instagram</a></li>
+      <li><a href="#footer" data-en="Follow" data-no="Følg">Follow</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="no" aria-pressed="false">NO</button>
+      </div>
+      <button class="toggler" id="toggler" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section id="hero">
+    <div class="hero-portrait"><img src="portrait-hq.jpg" alt="Jazz pianist Nikolai Hansli sitting at the piano"></div>
+    <div class="container hero-wrap">
+      <div>
+        <p class="eyebrow" data-en="Jazz pianist · Composer · Arranger" data-no="Jazzpianist · Komponist · Arrangør">Jazz pianist · Composer · Arranger</p>
+        <h1 class="hero-title">Nikolai Hansli</h1>
+        <p class="hero-lead" data-en="From Bærum, studying jazz at NTNU in Trondheim. A personal, exploratory sound where jazz meets Norwegian folk music." data-no="Fra Bærum, student på Jazzlinja ved NTNU i Trondheim. Et personlig og utforskende uttrykk der jazz møter norsk folkemusikk.">From Bærum, studying jazz at NTNU in Trondheim. A personal, exploratory sound where jazz meets Norwegian folk music.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#listen" data-en="Listen" data-no="Lytt">Listen</a>
+          <a class="btn btn-ghost" href="#repertoire" data-en="Selected work" data-no="Utvalgt arbeid">Selected work</a>
+        </div>
+      </div>
+    </div>
+    <div class="keys-strip" aria-hidden="true" id="strip"></div>
+  </section>
+
+  <section id="about" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2 data-en="About" data-no="Om meg">About</h2></div>
+      <div class="about">
+        <figure class="about-photo reveal">
+          <img src="portrait-hq.jpg" alt="Nikolai Hansli by the piano" loading="lazy">
+        </figure>
+        <div class="about-text reveal">
+          <p data-en="Nikolai Hansli (b. 2004) is a jazz pianist, composer and arranger from Bærum. He has made his mark with a personal and exploratory expression, and has played on several of the country's leading stages and festivals." data-no="Nikolai Hansli (f. 2004) er jazzpianist, komponist og arrangør fra Bærum. Han har markert seg med et personlig og utforskende uttrykk, og har spilt på flere av landets fremste scener og festivaler.">Nikolai Hansli (b. 2004) is a jazz pianist, composer and arranger from Bærum. He has made his mark with a personal and exploratory expression, and has played on several of the country's leading stages and festivals.</p>
+          <p data-en="He studies jazz at NTNU in Trondheim and was awarded the 2025 music scholarship from Bærum Kulturhus and Bærum Rotary. His music draws on jazz, folk music, gospel and meditative soundscapes." data-no="Han studerer jazz ved NTNU i Trondheim og vant i 2025 musikkstipendet fra Bærum Kulturhus og Bærum Rotary. Musikken hans henter inspirasjon fra jazz, folkemusikk, gospel og meditative klanger.">He studies jazz at NTNU in Trondheim and was awarded the 2025 music scholarship from Bærum Kulturhus and Bærum Rotary. His music draws on jazz, folk music, gospel and meditative soundscapes.</p>
+          <ul class="facts">
+            <li><b data-en="Plays" data-no="Spiller">Plays</b><span data-en="Piano & electronics" data-no="Piano og elektronikk">Piano &amp; electronics</span></li>
+            <li><b data-en="Roles" data-no="Roller">Roles</b><span data-en="Pianist, composer, arranger, bandleader" data-no="Pianist, komponist, arrangør, bandleder">Pianist, composer, arranger, bandleader</span></li>
+            <li><b data-en="Studying" data-no="Studerer">Studying</b><span>Jazz, NTNU Trondheim</span></li>
+            <li><b data-en="From" data-no="Fra">From</b><span>Bærum · 2004</span></li>
+            <li><b data-en="Inspired by" data-no="Inspirert av">Inspired by</b><span data-en="Jazz, folk, gospel" data-no="Jazz, folkemusikk, gospel">Jazz, folk, gospel</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="listen">
+    <div class="container">
+      <div class="listen-wrap">
+        <div class="section-head reveal">
+          <h2 data-en="Listen" data-no="Lytt">Listen</h2>
+          <div class="lp-links"><a href="https://open.spotify.com/album/5RAGrDzVl0JOjz0bOuyip7" target="_blank" rel="noopener">Spotify ↗</a><a href="https://www.youtube.com/@nikolaihansli" target="_blank" rel="noopener">YouTube ↗</a></div>
+        </div>
+        <div class="listen reveal">
+          <div class="lp">
+            <img class="lp-cover" src="cover.jpg" alt="Why We Continue – album cover" width="640" height="640">
+            <div class="lp-info">
+              <p class="meta" data-en="Latest release" data-no="Siste utgivelse">Latest release</p>
+              <h3>Why We Continue</h3>
+              <p class="lp-by" id="lp-title">Nikolai Hansli</p>
+            </div>
+            <div class="lp-bar"><span id="lp-cur">0:00</span><input type="range" id="lp-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek"><span id="lp-dur">0:30</span></div>
+            <div class="lp-ctrl">
+              <button type="button" id="lp-prev" aria-label="Previous">⏮</button>
+              <button type="button" id="lp-play" class="lp-main" aria-label="Play">▶</button>
+              <button type="button" id="lp-next" aria-label="Next">⏭</button>
+            </div>
+          </div>
+          <ol class="tl" id="tracklist"></ol>
+          <audio id="lp-audio" preload="none" crossorigin="anonymous"></audio>
+        </div>
+        <div class="piano-wrap reveal">
+          <div class="piano-head">
+            <p data-en="The piano follows the music. Join in on the keys or with your keyboard." data-no="Pianoet følger musikken. Spill med på tangentene eller tastaturet.">The piano follows the music. Join in on the keys or with your keyboard.</p>
+            <span class="pill" id="note-out">♪</span>
+          </div>
+          <div class="piano" id="piano" role="group" aria-label="Piano"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="repertoire" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2 data-en="Selected work" data-no="Utvalgt arbeid">Selected work</h2></div>
+      <div class="projects">
+        <article class="card reveal"><span class="meta">30.10.2025 · Bærum Kulturhus</span><h3>Nye røtter</h3><p data-en="Prize-winner concert and world premiere at Bærum Jazz Festival 2025. Old Norwegian folk texts combined with newly written music inspired by jazz, folk, gospel and meditative soundscapes. 75 minutes, seven musicians." data-no="Prisvinnerkonsert og urfremføring under Bærum Jazzfestival 2025. Gamle norske folketekster kombinert med egen nyskrevet musikk inspirert av jazz, folkemusikk, gospel og meditative klanger. 1 t 15 min, sju musikere.">Prize-winner concert and world premiere at Bærum Jazz Festival 2025. Old Norwegian folk texts combined with newly written music inspired by jazz, folk, gospel and meditative soundscapes. 75 minutes, seven musicians.</p><div class="tags"><span class="tag">Jazz</span><span class="tag">Folk</span><span class="tag">Original</span></div><a class="go" href="https://www.baerumkulturhus.no/arkiv/2025-host/nikolai-hansli-nye-rotter/" target="_blank" rel="noopener" data-en="Read more →" data-no="Les mer →">Read more →</a></article>
+        <article class="card reveal"><span class="meta">2025 · Bærum Kulturhus &amp; Bærum Rotary</span><h3 data-en="Music scholarship" data-no="Musikkstipend">Music scholarship</h3><p data-en="Winner of the 2025 music scholarship, awarded by a committee. It includes financial support, professional guidance and a full production together with Bærum Kulturhus." data-no="Vinner av musikkstipendet for 2025, tildelt av en komité. Stipendet gir økonomisk støtte, faglig oppfølging og en profesjonell produksjon i samarbeid med Kulturhuset.">Winner of the 2025 music scholarship, awarded by a committee. It includes financial support, professional guidance and a full production together with Bærum Kulturhus.</p></article>
+        <article class="card reveal"><span class="meta" data-en="Ensemble" data-no="Besetning">Ensemble</span><h3 data-en="The “Nye røtter” band" data-no="Bandet i «Nye røtter»">The “Nye røtter” band</h3><p>Siv Aurlund (vokal) · Mads Lundh Kristiansen (tenorsaksofon) · Lars Viljo Fauske (fiolin) · Rebekka Hansli (fiolin) · Bendik Løland Lundsvoll (kontrabass) · Erik Wie Flaig (trommer)</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="personality" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2 data-en="How I play" data-no="Slik spiller jeg">How I play</h2></div>
+      <p class="lead-quote reveal" data-en="“A musical breathing space, with both roots and direction.”" data-no="«Et musikalsk pusterom med både røtter og retning.»">“A musical breathing space, with both roots and direction.”</p>
+      <div class="traits">
+        <article class="card reveal"><h3 data-en="Roots" data-no="Røtter">Roots</h3><p data-en="Old Norwegian folk texts as the starting point." data-no="Gamle norske folketekster som utgangspunkt.">Old Norwegian folk texts as the starting point.</p></article>
+        <article class="card reveal"><h3 data-en="Harmony" data-no="Harmonikk">Harmony</h3><p data-en="Jazz language and gospel warmth." data-no="Jazzspråk og gospelvarme.">Jazz language and gospel warmth.</p></article>
+        <article class="card reveal"><h3 data-en="Space" data-no="Rom">Space</h3><p data-en="Meditative soundscapes and electronics." data-no="Meditative klanger og elektronikk.">Meditative soundscapes and electronics.</p></article>
+        <article class="card reveal"><h3 data-en="Direction" data-no="Retning">Direction</h3><p data-en="Newly written music, explored with a band." data-no="Egen nyskrevet musikk, utforsket sammen med band.">Newly written music, explored with a band.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2 data-en="Experience" data-no="Erfaring">Experience</h2></div>
+      <ul class="jobs reveal">
+        <li><div><h3 data-en="Prize-winner concert “Nye røtter”" data-no="Prisvinnerkonsert «Nye røtter»">Prize-winner concert “Nye røtter”</h3><span class="org" data-en="Underhuset, Bærum Kulturhus · Bærum Jazz Festival" data-no="Underhuset, Bærum Kulturhus · Bærum Jazzfestival">Underhuset, Bærum Kulturhus · Bærum Jazz Festival</span></div><span class="when">2025</span></li>
+        <li><div><h3 data-en="Music scholarship winner" data-no="Vinner av musikkstipend">Music scholarship winner</h3><span class="org">Bærum Kulturhus &amp; Bærum Rotary</span></div><span class="when">2025</span></li>
+        <li><div><h3 data-en="Jazz student" data-no="Jazzstudent">Jazz student</h3><span class="org" data-en="Jazz programme, NTNU, Trondheim" data-no="Jazzlinja, NTNU, Trondheim">Jazz programme, NTNU, Trondheim</span></div><span class="when" data-en="Now" data-no="Nå">Now</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="instagram" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2>Instagram</h2></div>
+      <div class="ig">
+        <div class="ig-text reveal">
+          <p class="ig-handle">@nikolai.hansli</p>
+          <p data-en="Concerts, rehearsals and moments behind the piano. Follow along for what's new." data-no="Konserter, øvinger og øyeblikk bak flygelet. Følg med for å se hva som skjer.">Concerts, rehearsals and moments behind the piano. Follow along for what's new.</p>
+          <a class="btn btn-dark" href="https://www.instagram.com/nikolai.hansli/" target="_blank" rel="noopener" data-en="Follow on Instagram" data-no="Følg på Instagram">Follow on Instagram</a>
+        </div>
+        <div class="ig-frame reveal">
+          <div class="ig-fallback"><strong>@nikolai.hansli</strong><span data-en="Loading Instagram…" data-no="Laster Instagram…">Loading Instagram…</span></div>
+          <iframe src="https://www.instagram.com/nikolai.hansli/embed/" title="Instagram: @nikolai.hansli" loading="lazy" scrolling="yes" allowtransparency="true"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  <div class="foot-keys keys-strip" aria-hidden="true" id="strip2"></div>
+  <div class="container foot">
+    <span>© 2026 Nikolai Hansli · Bærum / Trondheim</span>
+    <span><a href="https://www.instagram.com/nikolai.hansli/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@nikolaihansli" target="_blank" rel="noopener">YouTube</a><a href="https://open.spotify.com/album/5RAGrDzVl0JOjz0bOuyip7" target="_blank" rel="noopener">Spotify</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  // Navbar
+  var nav = $('#navbar'), toggler = $('#toggler'), links = $('#nav-links');
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  toggler.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggler.setAttribute('aria-expanded', open); document.body.classList.toggle('nav-open', open);
+  });
+  $$('a', links).forEach(function (a) { a.addEventListener('click', function () {
+    links.classList.remove('open'); toggler.setAttribute('aria-expanded', 'false'); document.body.classList.remove('nav-open'); }); });
+
+  // Active link
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) {
+    if (e.isIntersecting) $$('.nav-links a').forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+  }); }, { rootMargin: '-45% 0px -50% 0px' });
+  $$('main section[id]').forEach(function (s) { io.observe(s); });
+
+  // Reveal
+  $$('.reveal').forEach(function (el) {
+    var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.classList.contains('reveal'); });
+    var i = sibs.indexOf(el); if (i > 0) el.style.setProperty('--rd', Math.min(i, 4) * 0.09 + 's');
+  });
+  var rv = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } }); }, { threshold: .12 });
+  $$('.reveal').forEach(function (el) { rv.observe(el); });
+
+  // Language
+  function applyLang(l) {
+    document.documentElement.lang = l;
+    $$('[data-en]').forEach(function (el) { el.textContent = el.getAttribute('data-' + l); });
+    $$('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lang === l); });
+    try { localStorage.setItem('nh-lang', l); } catch (e) {}
+  }
+  function setLang(l) {
+    if (l === document.documentElement.lang) return;
+    document.body.classList.add('swap');
+    setTimeout(function () { applyLang(l); document.body.classList.remove('swap'); }, 200);
+  }
+  $$('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+  try { if (localStorage.getItem('nh-lang') === 'no') applyLang('no'); } catch (e) {}
+
+  // Decorative key strips
+  var pattern = ['', 'b', 'b', 'nb', 'b', 'b', 'b'];
+  ['strip', 'strip2'].forEach(function (id) {
+    var el = document.getElementById(id), h = '';
+    for (var i = 0; i < 42; i++) h += '<i class="' + pattern[i % 7] + '"></i>';
+    el.innerHTML = h;
+  });
+
+  // Jazz glyphs in the corners of the cards
+  var G = [
+    ['Cmaj7', 'Major seventh: the classic jazz “home” chord'], ['Dm7', 'The ii chord'], ['G7♭9', 'Dominant with a flat nine'],
+    ['ii–V–I', 'The backbone of jazz harmony'], ['E♭Δ7', 'Major seventh, triangle notation'], ['Em7♭5', 'Half-diminished: ø7'],
+    ['A7alt', 'Altered dominant'], ['♭II7', 'Tritone substitution'], ['C6/9', 'Sixth-nine: an open, final sound'],
+    ['D7♯11', 'Lydian dominant'], ['B♭13', 'Thirteenth chord'], ['swing', 'Swung eighth notes'],
+    ['♩ = 120', 'Tempo marking'], ['trade 4s', 'Trading fours between soloists'], ['comp', 'Accompany behind a soloist'],
+    ['D.S. al Coda', 'Go back to the sign, then to the coda'], ['N.C.', 'No chord'], ['8va', 'Play an octave higher'],
+    ['rit.', 'Slow down gradually'], ['F♯ø7', 'Half-diminished seventh'], ['I–vi–ii–V', 'Rhythm changes turnaround'], ['%', 'Repeat the previous bar']
+  ];
+  $$('.card').forEach(function (card, ci) {
+    ['tl', 'tr', 'bl', 'br'].forEach(function (pos, k) {
+      var g = G[(ci * 5 + k * 7 + ci) % G.length], s = document.createElement('span');
+      s.className = 'cg ' + pos; s.textContent = g[0]; s.title = g[1]; s.setAttribute('aria-hidden', 'true');
+      card.appendChild(s);
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var tracks = [{"t":"Equinox","a":"Nikolai Hansli, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":391692,"p":"https://p.scdn.co/mp3-preview/c0ee2f2406f71ba5bbd328e4e1fad9ff9216e210","id":"1MmIBBm9noUc2knYHd6J2b"},{"t":"Giant Steps","a":"Nikolai Hansli, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":358522,"p":"https://p.scdn.co/mp3-preview/0c59627c0472e20f7c4b7f31df1d6162b49f33dc","id":"7IZBWSdVd8aFIrgrC24sEw"},{"t":"After You've Gone","a":"Nikolai Hansli, Ola Kvernberg, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":497743,"p":"https://p.scdn.co/mp3-preview/c4e75a1d32a75df98d4845df999a1ff8fc220d16","id":"2tk8oWyBYI8kPgOY9Cc0my"},{"t":"Cheek To Cheek","a":"Nikolai Hansli, Sisi Sumbundu, Felix Peikli, Tarald Kongshaug, Steinar Heide Bø","d":359334,"p":"https://p.scdn.co/mp3-preview/59ee8359b612fafc5114157a12f521125256ad7e","id":"2fbNHwakdcbWA0lXcyNHC6"},{"t":"Puttin' On The Ritz","a":"Nikolai Hansli, Felix Peikli, Tarald Kongshaug, Steinar Heide Bø","d":273826,"p":"https://p.scdn.co/mp3-preview/e039825f30d2667476ab382b9d0615239e6fca3c","id":"4rceM5BQU1afiW253RDHKm"},{"t":"I Wish I Knew How It Would Feel To Be Free","a":"Nikolai Hansli, Sisi Sumbundu, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":374830,"p":"https://p.scdn.co/mp3-preview/2883a85b3f643c53708b596c8b5a23a6dc447f40","id":"4iEQOgtjNKw4q4EEIMgXyl"},{"t":"Misty","a":"Nikolai Hansli, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":349032,"p":"https://p.scdn.co/mp3-preview/5882f4bf401d5882ef2d214e998902bba30ceab7","id":"1tE4iSLjM0qONLHiQmXJDT"},{"t":"Firm Roots","a":"Nikolai Hansli, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":371210,"p":"https://p.scdn.co/mp3-preview/def037395f585b24c29f9bcf2912b8529a8e69dd","id":"0NJEUbRsCZqEh5ty3rwTHY"},{"t":"Have You Met Miss Jones","a":"Nikolai Hansli, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":454445,"p":"https://p.scdn.co/mp3-preview/1694b68569a60a87df018b210bc6da05d8f9c285","id":"0LQfdZajza02Fg3OZpEFWl"},{"t":"Lester Leaps In","a":"Nikolai Hansli, Brede Sørum, Tarald Kongshaug, Steinar Heide Bø","d":375505,"p":"https://p.scdn.co/mp3-preview/27952e5d5bb0c7945f4926e79c632d39dbe94fd3","id":"5uzSheU4rNypqVDW0LCVe3"}];
+  var list = document.getElementById('tracklist'), audio = document.getElementById('lp-audio');
+  var playBtn = document.getElementById('lp-play'), seek = document.getElementById('lp-seek'),
+      cur = document.getElementById('lp-cur'), dur = document.getElementById('lp-dur'), title = document.getElementById('lp-title'),
+      out = document.getElementById('note-out'), pianoEl = document.getElementById('piano');
+  var idx = -1, ctx = null, analyser = null, freq = null, sourceOk = false, triedPlain = false, raf = 0;
+
+  function fmt(s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+
+  /* ---------- Piano: C3..B5 ---------- */
+  var small = window.innerWidth < 700, FIRST = small ? 53 : 48, LAST = small ? 76 : 83, WHITE = [0, 2, 4, 5, 7, 9, 11], NAMES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
+  var KEYMAP = { a: 60, w: 61, s: 62, e: 63, d: 64, f: 65, t: 66, g: 67, y: 68, h: 69, u: 70, j: 71, k: 72, o: 73, l: 74, p: 75, ';': 76 };
+  var LABEL = {}; Object.keys(KEYMAP).forEach(function (k) { LABEL[KEYMAP[k]] = k.toUpperCase(); });
+  var keys = [], whiteCount = 0, totalWhite = 0;
+  for (var m = FIRST; m <= LAST; m++) if (WHITE.indexOf(m % 12) >= 0) totalWhite++;
+  for (var midi = FIRST; midi <= LAST; midi++) {
+    var black = WHITE.indexOf(midi % 12) < 0, el = document.createElement('button');
+    el.type = 'button'; el.className = 'pk' + (black ? ' black' : ''); el.setAttribute('aria-label', NAMES[midi % 12] + (Math.floor(midi / 12) - 1));
+    if (black) { el.style.left = (whiteCount * 100 / totalWhite) + '%'; el.style.width = (100 / totalWhite * .6) + '%'; }
+    else whiteCount++;
+    if (LABEL[midi]) el.innerHTML = '<span>' + LABEL[midi] + '</span>';
+    el.dataset.midi = midi;
+    (function (mm, ee) { ee.addEventListener('pointerdown', function (e) { e.preventDefault(); userPlay(mm); }); })(midi, el);
+    pianoEl.appendChild(el); keys.push({ midi: midi, el: el, f: 440 * Math.pow(2, (midi - 69) / 12), lvl: 0 });
+  }
+  function ensureCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(f) {
+    try {
+      var c = ensureCtx(), t = c.currentTime, g = c.createGain(); g.connect(c.destination);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.2, t + .008); g.gain.exponentialRampToValueAtTime(.001, t + 2);
+      [[1, 1], [2, .4], [3, .18], [4, .08], [5, .04]].forEach(function (p) {
+        var o = c.createOscillator(), og = c.createGain(); o.frequency.value = f * p[0]; og.gain.value = p[1];
+        o.connect(og); og.connect(g); o.start(t); o.stop(t + 2.1);
+      });
+    } catch (e) {}
+  }
+  function userPlay(midi) {
+    var k = keys[midi - FIRST]; if (!k) return;
+    tone(k.f); out.textContent = '♪ ' + NAMES[midi % 12] + (Math.floor(midi / 12) - 1);
+    k.el.classList.add('down'); setTimeout(function () { k.el.classList.remove('down'); }, 140);
+    k.user = performance.now() + 260;
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.repeat || e.ctrlKey || e.metaKey || e.altKey || /input|textarea|select/i.test(e.target.tagName)) return;
+    var m = KEYMAP[e.key.toLowerCase()]; if (m) userPlay(m);
+  });
+
+  /* ---------- Audio follow: spectrum -> keys ---------- */
+  function setupAnalyser() {
+    if (analyser || triedPlain) return;
+    try {
+      var c = ensureCtx(), src = c.createMediaElementSource(audio);
+      analyser = c.createAnalyser(); analyser.fftSize = 8192; analyser.smoothingTimeConstant = .6;
+      src.connect(analyser); analyser.connect(c.destination); freq = new Uint8Array(analyser.frequencyBinCount); sourceOk = true;
+    } catch (e) { analyser = null; }
+  }
+  function frame() {
+    raf = 0;
+    var now = performance.now();
+    if (analyser && !audio.paused) {
+      analyser.getByteFrequencyData(freq);
+      var bw = ctx.sampleRate / analyser.fftSize, vals = [], max = 0;
+      keys.forEach(function (k, i) {
+        var lo = Math.max(1, Math.floor(k.f * .972 / bw)), hi = Math.ceil(k.f * 1.029 / bw), v = 0;
+        for (var b = lo; b <= hi; b++) if (freq[b] > v) v = freq[b];
+        var h2 = Math.round(k.f * 2 / bw); if (freq[h2] > v * .9) v = Math.max(v, freq[h2] * .8);
+        vals.push(v); if (v > max) max = v;
+      });
+      keys.forEach(function (k, i) {
+        var v = vals[i], on = max > 70 && v > max * .72 && v > 85 ? Math.min(1, (v - max * .55) / (max * .45)) : 0;
+        k.lvl = Math.max(on, k.lvl * .86);
+      });
+    } else { keys.forEach(function (k) { k.lvl *= .8; }); }
+    var active = false;
+    keys.forEach(function (k) {
+      var lv = (k.user && k.user > now) ? 1 : k.lvl;
+      if (lv > .02) active = true;
+      k.el.style.setProperty('--i', lv > .02 ? lv.toFixed(2) : 0);
+      k.el.classList.toggle('down', lv > .75 || (k.user && k.user > now));
+    });
+    if (!audio.paused || active) raf = requestAnimationFrame(frame);
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+
+  /* ---------- Player ---------- */
+  tracks.forEach(function (t, i) {
+    var li = document.createElement('li'); li.tabIndex = 0; li.setAttribute('role', 'button');
+    li.innerHTML = '<span class="n">' + (i + 1) + '</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="t"></span><span class="time">' + fmt(t.d / 1000) + '</span>';
+    var tt = li.querySelector('.t'); var tb = document.createElement('b'); tb.textContent = t.t; tt.appendChild(tb);
+    var sm = document.createElement('span'); sm.className = 'a'; sm.textContent = t.a.split(', ').slice(0, 3).join(', '); tt.appendChild(sm);
+    li.addEventListener('click', function () { load(i, true); });
+    li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(i, true); } });
+    list.appendChild(li);
+  });
+  var items = list.children;
+  function mark() {
+    Array.prototype.forEach.call(items, function (li, i) { li.classList.toggle('on', i === idx); li.classList.toggle('playing', i === idx && !audio.paused); });
+    playBtn.textContent = audio.paused ? '▶' : '⏸'; playBtn.setAttribute('aria-label', audio.paused ? 'Play' : 'Pause');
+  }
+  function load(i, play) {
+    idx = (i + tracks.length) % tracks.length;
+    var t = tracks[idx];
+    title.textContent = (idx + 1) + '. ' + t.t;
+    if (!t.p) { window.open('https://open.spotify.com/track/' + t.id, '_blank', 'noopener'); return; }
+    setupAnalyser();
+    audio.src = t.p; seek.value = 0; cur.textContent = '0:00';
+    if (play) audio.play().catch(function () {});
+    mark(); kick();
+  }
+  // If the preview cannot be analysed (CORS), fall back to plain playback without the note lights
+  audio.addEventListener('error', function () {
+    if (!triedPlain && !sourceOk && audio.getAttribute('crossorigin') !== null) {
+      triedPlain = true; audio.removeAttribute('crossorigin'); audio.src = tracks[idx].p; audio.play().catch(function () {});
+    }
+  });
+  playBtn.addEventListener('click', function () {
+    if (idx < 0) return load(0, true);
+    setupAnalyser();
+    if (audio.paused) audio.play().catch(function () {}); else audio.pause();
+  });
+  document.getElementById('lp-prev').addEventListener('click', function () { load(idx < 0 ? 0 : idx - 1, true); });
+  document.getElementById('lp-next').addEventListener('click', function () { load(idx + 1, true); });
+  audio.addEventListener('play', function () { mark(); kick(); }); audio.addEventListener('pause', mark);
+  audio.addEventListener('ended', function () { load(idx + 1, true); });
+  audio.addEventListener('loadedmetadata', function () { dur.textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', function () { if (audio.duration) { seek.value = audio.currentTime / audio.duration * 100; cur.textContent = fmt(audio.currentTime); } });
+  seek.addEventListener('input', function () { if (audio.duration) audio.currentTime = seek.value / 100 * audio.duration; });
+  new IntersectionObserver(function (es) { if (!es[0].isIntersecting && !audio.paused) audio.pause(); }, { threshold: 0 }).observe(document.getElementById('listen'));
+})();
+</script>
+
+<script>
+(function () {
+  var root = document.documentElement, loader = document.getElementById('loader');
+  if (!root.classList.contains('show-loader')) return;
+  var keysEl = document.getElementById('l-keys');
+  var white = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88], glyphs = ['♪', '♫', '♩', '♬'];
+  var whiteEls = [];
+  white.forEach(function () { var k = document.createElement('div'); k.className = 'l-key'; keysEl.appendChild(k); whiteEls.push(k); });
+  [0, 1, 3, 4, 5].forEach(function (i) { var b = document.createElement('div'); b.className = 'l-black'; b.style.left = ((i + 1) / 7 * 100) + '%'; keysEl.appendChild(b); });
+  var ctx = null;
+  function tone(f) {
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
+      var t = ctx.currentTime, g = ctx.createGain(); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.22, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + 1.4);
+      [[1, 1], [2, .35], [3, .12]].forEach(function (p) {
+        var o = ctx.createOscillator(), og = ctx.createGain();
+        o.frequency.value = f * p[0]; og.gain.value = p[1]; o.connect(og); og.connect(g); o.start(t); o.stop(t + 1.5);
+      });
+    } catch (e) {}
+  }
+  var melody = [0, 2, 4, 6], step = 140, done = false, timers = [];
+  function play(i) {
+    var k = whiteEls[melody[i]]; k.classList.add('on'); tone(white[melody[i]]);
+    setTimeout(function () { k.classList.remove('on'); }, 220);
+  }
+  function fall() {
+    Array.prototype.forEach.call(loader.querySelectorAll('.l-key, .l-black, .l-note'), function (el) {
+      el.style.setProperty('--d', (Math.random() * .12).toFixed(2) + 's');
+      el.style.setProperty('--r', ((Math.random() - .5) * 70).toFixed(0) + 'deg');
+    });
+    loader.classList.add('falling');
+  }
+  function open() {
+    loader.classList.add('opening'); root.classList.remove('show-loader');
+    setTimeout(function () { loader.style.display = 'none'; }, 700);
+  }
+  function skip() { if (!done) { done = true; timers.forEach(clearTimeout); open(); } }
+  function finish() { if (done) return; done = true; timers.forEach(clearTimeout); fall(); setTimeout(open, 450); }
+  melody.forEach(function (m, i) { timers.push(setTimeout(function () { play(i); }, 120 + i * step)); });
+  timers.push(setTimeout(finish, 120 + melody.length * step + 200));
+  loader.addEventListener('click', skip);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') skip(); });
+})();
+</script>
+</body>
+</html>
