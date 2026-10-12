@@ -6,7 +6,8 @@
 <title>Nikolai Hansli | Jazz Pianist</title>
 <meta name="description" content="Nikolai Hansli, jazzpianist, komponist og arrangør fra Bærum. Student ved Jazzlinja ved NTNU.">
 <meta name="theme-color" content="#17120e">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317120e'/%3E%3Crect x='6' y='6' width='4' height='20' fill='%23fff'/%3E%3Crect x='12' y='6' width='4' height='20' fill='%23fff'/%3E%3Crect x='18' y='6' width='4' height='20' fill='%23fff'/%3E%3Crect x='9' y='6' width='3' height='12' fill='%23b8863b'/%3E%3Crect x='15' y='6' width='3' height='12' fill='%23b8863b'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
@@ -292,6 +293,33 @@ section.band { padding: 6.5rem 0; }
 .jobs .when { grid-row: 1; grid-column: 2; color: var(--muted); font-size: .85rem; font-weight: 600; white-space: nowrap; }
 @media (max-width: 600px) { .jobs li { grid-template-columns: 1fr; } .jobs .when { grid-row: auto; grid-column: 1; } }
 
+/* Concerts */
+.cs-group + .cs-group { margin-top: 3rem; }
+.cs-title { font-family: var(--font-brand); font-size: 1.5rem; margin: 0 0 1rem; display: flex; align-items: baseline; gap: .7rem; }
+.cs-title small { font-family: var(--font-ui); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.cs-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.cs-item { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr) auto; gap: .3rem 1.6rem; align-items: center; padding: 1.4rem .4rem; border-bottom: 1px solid var(--line); transition: background-color .4s var(--ease), padding-left .4s var(--ease); }
+.cs-item:hover { background: rgba(255,255,255,.55); padding-left: .9rem; }
+.cs-date { text-align: center; line-height: 1; border-right: 1px solid var(--line); padding-right: 1.2rem; }
+.cs-date b { display: block; font-family: var(--font-brand); font-size: 2.2rem; color: var(--ink); }
+.cs-date span { display: block; margin-top: .3rem; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.cs-date i { display: block; margin-top: .2rem; font-style: normal; font-size: .68rem; color: var(--muted); }
+.cs-info h4 { margin: 0; font-family: var(--font-brand); font-size: 1.45rem; color: var(--ink); line-height: 1.2; }
+.cs-venue { margin: .15rem 0 0; font-size: .92rem; color: var(--text); font-weight: 600; }
+.cs-note { margin: .35rem 0 0; font-size: .9rem; color: var(--muted); max-width: 40rem; }
+.cs-tag { font-size: .72rem; padding: .05rem .65rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-weight: 600; margin-left: .6rem; vertical-align: middle; }
+.cs-action { white-space: nowrap; }
+.cs-action .btn { padding: .55rem 1.2rem; font-size: .88rem; }
+.cs-item.past .cs-date b { color: var(--muted); }
+.cs-empty { padding: 2rem .4rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 1rem; }
+.cs-empty a { font-weight: 600; }
+@media (max-width: 700px) {
+  .cs-item { grid-template-columns: 3.6rem minmax(0, 1fr); gap: .5rem 1rem; }
+  .cs-date { padding-right: .8rem; }
+  .cs-date b { font-size: 1.8rem; }
+  .cs-action { grid-column: 2; }
+}
+
 /* Instagram */
 #instagram { background: #f3eee6; border-top: 1px solid var(--line); }
 .ig { display: grid; grid-template-columns: 1fr minmax(300px, 460px); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
@@ -336,10 +364,8 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     <ul class="nav-links" id="nav-links">
       <li><a href="#about" data-en="About" data-no="Om meg">About</a></li>
       <li><a href="#listen" data-en="Listen" data-no="Lytt">Listen</a></li>
-      <li><a href="#repertoire" data-en="Work" data-no="Prosjekter">Work</a></li>
-      <li><a href="#experience" data-en="Experience" data-no="Erfaring">Experience</a></li>
-      <li><a href="#instagram">Instagram</a></li>
-      <li><a href="#footer" data-en="Follow" data-no="Følg">Follow</a></li>
+      <li><a href="#concerts" data-en="Concerts" data-no="Konserter">Concerts</a></li>
+      <li><a href="#instagram" data-en="Follow" data-no="Følg">Follow</a></li>
     </ul>
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Language">
@@ -422,6 +448,20 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
           </div>
           <div class="piano" id="piano" role="group" aria-label="Piano"></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="concerts" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2 data-en="Concerts" data-no="Konserter">Concerts</h2></div>
+      <div class="cs-group reveal" id="cs-upcoming">
+        <h3 class="cs-title"><span data-en="Upcoming" data-no="Kommende">Upcoming</span></h3>
+        <ul class="cs-list" id="cs-upcoming-list"></ul>
+      </div>
+      <div class="cs-group reveal" id="cs-past">
+        <h3 class="cs-title"><span data-en="Past" data-no="Tidligere">Past</span></h3>
+        <ul class="cs-list" id="cs-past-list"></ul>
       </div>
     </div>
   </section>
@@ -694,6 +734,61 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
   audio.addEventListener('timeupdate', function () { if (audio.duration) { seek.value = audio.currentTime / audio.duration * 100; cur.textContent = fmt(audio.currentTime); } });
   seek.addEventListener('input', function () { if (audio.duration) audio.currentTime = seek.value / 100 * audio.duration; });
   new IntersectionObserver(function (es) { if (!es[0].isIntersecting && !audio.paused) audio.pause(); }, { threshold: 0 }).observe(document.getElementById('listen'));
+})();
+</script>
+
+<script src="concerts.js"></script>
+<script>
+(function () {
+  var data = (window.NH_CONCERTS || []).slice();
+  var upL = document.getElementById('cs-upcoming-list'), pastL = document.getElementById('cs-past-list'),
+      upG = document.getElementById('cs-upcoming'), pastG = document.getElementById('cs-past');
+  if (!upL) return;
+  function pick(v, lang) { return v && typeof v === 'object' ? (v[lang] || v.en || '') : (v || ''); }
+  function make(c, lang, past) {
+    var d = new Date(c.date + 'T12:00:00'), loc = lang === 'no' ? 'nb-NO' : 'en-GB';
+    var li = document.createElement('li'); li.className = 'cs-item' + (past ? ' past' : '');
+    var date = document.createElement('div'); date.className = 'cs-date';
+    var day = document.createElement('b'); day.textContent = d.getDate();
+    var mon = document.createElement('span'); mon.textContent = d.toLocaleDateString(loc, { month: 'short', year: 'numeric' }).replace('.', '');
+    date.appendChild(day); date.appendChild(mon);
+    if (c.time) { var tm = document.createElement('i'); tm.textContent = c.time; date.appendChild(tm); }
+    var info = document.createElement('div'); info.className = 'cs-info';
+    var h = document.createElement('h4'); h.textContent = c.title;
+    if (c.tag) { var tg = document.createElement('span'); tg.className = 'cs-tag'; tg.textContent = c.tag; h.appendChild(tg); }
+    var v = document.createElement('p'); v.className = 'cs-venue'; v.textContent = c.venue + (c.city ? ', ' + c.city : '');
+    info.appendChild(h); info.appendChild(v);
+    var note = pick(c.note, lang);
+    if (note) { var n = document.createElement('p'); n.className = 'cs-note'; n.textContent = note; info.appendChild(n); }
+    li.appendChild(date); li.appendChild(info);
+    if (c.link) {
+      var act = document.createElement('div'); act.className = 'cs-action';
+      var a = document.createElement('a'); a.className = 'btn btn-dark'; a.href = c.link; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = pick(c.linkLabel, lang) || (lang === 'no' ? 'Mer info' : 'More info');
+      act.appendChild(a); li.appendChild(act);
+    }
+    return li;
+  }
+  function render() {
+    var lang = document.documentElement.lang === 'no' ? 'no' : 'en';
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var todayStr = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    var up = data.filter(function (c) { return c.date >= todayStr; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    var past = data.filter(function (c) { return c.date < todayStr; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    upL.innerHTML = pastL.innerHTML = '';
+    up.forEach(function (c) { upL.appendChild(make(c, lang, false)); });
+    past.forEach(function (c) { pastL.appendChild(make(c, lang, true)); });
+    if (!up.length) {
+      var e = document.createElement('li'); e.className = 'cs-empty';
+      e.innerHTML = lang === 'no'
+        ? 'Ingen kommende konserter er annonsert akkurat nå. Følg <a href="https://www.instagram.com/nikolai.hansli/" target="_blank" rel="noopener">@nikolai.hansli</a> for nyheter.'
+        : 'No upcoming concerts announced right now. Follow <a href="https://www.instagram.com/nikolai.hansli/" target="_blank" rel="noopener">@nikolai.hansli</a> for news.';
+      upL.appendChild(e);
+    }
+    pastG.style.display = past.length ? '' : 'none';
+  }
+  render();
+  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 })();
 </script>
 

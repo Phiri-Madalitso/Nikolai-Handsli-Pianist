@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#17120e"/>
+  <text x="32" y="37" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="34" fill="#e2c28a">N</text>
+  <g>
+    <rect x="9" y="44" width="11.5" height="14" rx="1.5" fill="#f7f4ef"/>
+    <rect x="21.5" y="44" width="11.5" height="14" rx="1.5" fill="#f7f4ef"/>
+    <rect x="34" y="44" width="11.5" height="14" rx="1.5" fill="#f7f4ef"/>
+    <rect x="46.5" y="44" width="8.5" height="14" rx="1.5" fill="#f7f4ef"/>
+    <rect x="16" y="44" width="7" height="8.5" rx="1" fill="#9a6b22"/>
+    <rect x="29.5" y="44" width="7" height="8.5" rx="1" fill="#9a6b22"/>
+    <rect x="42" y="44" width="7" height="8.5" rx="1" fill="#9a6b22"/>
+  </g>
+</svg>
