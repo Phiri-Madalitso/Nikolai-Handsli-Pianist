@@ -3,14 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nikolai Hansli | Jazz Pianist</title>
-<meta name="description" content="Nikolai Hansli, jazzpianist, komponist og arrangør fra Bærum. Student ved Jazzlinja ved NTNU.">
+<title>Nikolai Hansli | Jazz Pianist, Composer & Arranger</title>
+<meta name="description" content="Nikolai Hansli is a jazz pianist, composer and arranger from Bærum, studying in Trondheim. Listen to his music, watch videos and find upcoming concerts.">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#17120e">
 <link rel="canonical" href="https://nikolaihansli.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Nikolai Hansli | Jazz Pianist">
+<meta property="og:title" content="Nikolai Hansli | Jazz Pianist, Composer & Arranger">
+<meta property="og:description" content="Nikolai Hansli is a jazz pianist, composer and arranger from Bærum, studying in Trondheim. Listen to his music, watch videos and find upcoming concerts.">
+<meta property="og:site_name" content="Nikolai Hansli">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nikolai Hansli | Jazz Pianist, Composer & Arranger">
+<meta name="twitter:description" content="Nikolai Hansli is a jazz pianist, composer and arranger from Bærum, studying in Trondheim. Listen to his music, watch videos and find upcoming concerts.">
+<meta name="twitter:image" content="https://nikolaihansli.com/cover.jpg">
 <meta property="og:url" content="https://nikolaihansli.com/">
 <meta property="og:image" content="https://nikolaihansli.com/cover.jpg">
+<meta property="og:image:alt" content="Nikolai Hansli, album cover for Why We Continue">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nikolai Hansli",
+  "url": "https://nikolaihansli.com/",
+  "image": "https://nikolaihansli.com/portrait-hq.jpg",
+  "jobTitle": "Jazz pianist, composer and arranger",
+  "description": "Nikolai Hansli is a jazz pianist, composer and arranger from Bærum, studying in Trondheim. Listen to his music, watch videos and find upcoming concerts.",
+  "birthPlace": "Bærum, Norway",
+  "knowsAbout": ["Jazz", "Piano", "Composition", "Norwegian folk music"],
+  "sameAs": [
+    "https://www.instagram.com/nikolai.hansli/",
+    "https://www.youtube.com/@nikolaihansli",
+    "https://open.spotify.com/album/5RAGrDzVl0JOjz0bOuyip7"
+  ]
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -829,6 +856,18 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
       upL.appendChild(e);
     }
     pastG.style.display = past.length ? '' : 'none';
+    var ld = document.getElementById('ld-events');
+    if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'ld-events'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify(up.slice(0, 15).map(function (c) {
+      var parts = c.venue.replace(/\s*\(.*\)\s*$/, '').split(',');
+      return {
+        '@context': 'https://schema.org', '@type': 'MusicEvent', name: c.title + ' – Nikolai Hansli',
+        startDate: c.date, eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: { '@type': 'Place', name: parts[0].trim(), address: parts[parts.length - 1].trim() },
+        performer: { '@type': 'Person', name: 'Nikolai Hansli' }
+      };
+    }));
   }
   render();
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
