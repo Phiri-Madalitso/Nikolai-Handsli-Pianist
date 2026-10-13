@@ -340,6 +340,24 @@ section.band { padding: 6.5rem 0; }
   .cs-action { grid-column: 2; }
 }
 
+/* Past concerts by year */
+.cs-sub { margin: -.4rem 0 1.2rem; color: var(--muted); font-size: .95rem; }
+.cs-year { border-top: 1px solid var(--ink); }
+.cs-year:last-child { border-bottom: 1px solid var(--ink); }
+.cs-year summary { list-style: none; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem .4rem; cursor: pointer; font-family: var(--font-brand); font-size: 1.6rem; color: var(--ink); }
+.cs-year summary::-webkit-details-marker { display: none; }
+.cs-year summary small { font-family: var(--font-ui); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.cs-year summary::after { content: "+"; font-family: var(--font-ui); font-size: 1.4rem; color: var(--accent); margin-left: auto; padding-left: 1rem; transition: transform .3s var(--ease); }
+.cs-year[open] summary::after { content: "–"; }
+.cs-year summary > span { display: flex; align-items: baseline; gap: 1rem; }
+.cs-year .cs-list { border-top: 1px solid var(--line); }
+.cs-item.past { padding-block: .8rem; }
+.cs-item.past .cs-date b { font-size: 1.5rem; }
+.cs-item.past .cs-info h4 { font-size: 1.15rem; }
+.cs-item.past .cs-venue { font-size: .86rem; font-weight: 400; color: var(--muted); }
+.cs-more { margin-top: 1.2rem; background: transparent; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: .6rem 1.4rem; font: inherit; font-weight: 600; cursor: pointer; transition: background-color .3s var(--ease), color .3s var(--ease); }
+.cs-more:hover { background: var(--ink); color: #fff; }
+
 /* Instagram */
 #instagram { background: #f3eee6; border-top: 1px solid var(--line); }
 .ig { display: grid; grid-template-columns: 1fr minmax(300px, 460px); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
@@ -482,10 +500,12 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
       <div class="cs-group reveal" id="cs-upcoming">
         <h3 class="cs-title"><span data-en="Upcoming" data-no="Kommende">Upcoming</span></h3>
         <ul class="cs-list" id="cs-upcoming-list"></ul>
+        <button type="button" class="cs-more" id="cs-upcoming-more" hidden></button>
       </div>
       <div class="cs-group reveal" id="cs-past">
         <h3 class="cs-title"><span data-en="Past" data-no="Tidligere">Past</span></h3>
-        <ul class="cs-list" id="cs-past-list"></ul>
+        <p class="cs-sub" id="cs-past-sub"></p>
+        <div id="cs-past-list"></div>
       </div>
     </div>
   </section>
@@ -737,6 +757,9 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
   var upL = document.getElementById('cs-upcoming-list'), pastL = document.getElementById('cs-past-list'),
       upG = document.getElementById('cs-upcoming'), pastG = document.getElementById('cs-past');
   if (!upL) return;
+  var moreBtn = document.getElementById('cs-upcoming-more'), pastSub = document.getElementById('cs-past-sub'),
+      showAllUp = false, openYears = {};
+  moreBtn.addEventListener('click', function () { showAllUp = !showAllUp; render(); });
   function pick(v, lang) { return v && typeof v === 'object' ? (v[lang] || v.en || '') : (v || ''); }
   function make(c, lang, past) {
     var d = new Date(c.date + 'T12:00:00'), loc = lang === 'no' ? 'nb-NO' : 'en-GB';
@@ -758,9 +781,32 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     var todayStr = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     var up = data.filter(function (c) { return c.date >= todayStr; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
     var past = data.filter(function (c) { return c.date < todayStr; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    var no = lang === 'no', LIMIT = 8;
     upL.innerHTML = pastL.innerHTML = '';
-    up.forEach(function (c) { upL.appendChild(make(c, lang, false)); });
-    past.forEach(function (c) { pastL.appendChild(make(c, lang, true)); });
+    up.slice(0, showAllUp ? up.length : LIMIT).forEach(function (c) { upL.appendChild(make(c, lang, false)); });
+    if (up.length > LIMIT) {
+      moreBtn.hidden = false;
+      moreBtn.textContent = showAllUp ? (no ? 'Vis færre' : 'Show fewer')
+        : (no ? 'Vis alle ' + up.length + ' kommende konserter' : 'Show all ' + up.length + ' upcoming concerts');
+    } else moreBtn.hidden = true;
+    var years = [];
+    past.forEach(function (c) {
+      var y = c.date.slice(0, 4), g = years[years.length - 1];
+      if (!g || g.y !== y) { g = { y: y, items: [] }; years.push(g); }
+      g.items.push(c);
+    });
+    years.forEach(function (g, i) {
+      var det = document.createElement('details'); det.className = 'cs-year'; det.dataset.y = g.y;
+      det.open = openYears[g.y] !== undefined ? openYears[g.y] : i === 0;
+      det.addEventListener('toggle', function () { openYears[g.y] = det.open; });
+      var sum = document.createElement('summary');
+      sum.innerHTML = '<span>' + g.y + '<small>' + g.items.length + (no ? ' konserter' : ' concerts') + '</small></span>';
+      var ul = document.createElement('ul'); ul.className = 'cs-list';
+      g.items.forEach(function (c) { ul.appendChild(make(c, lang, true)); });
+      det.appendChild(sum); det.appendChild(ul); pastL.appendChild(det);
+    });
+    pastSub.textContent = no ? past.length + ' konserter siden ' + (years.length ? years[years.length - 1].y : '')
+      : past.length + ' concerts since ' + (years.length ? years[years.length - 1].y : '');
     if (!up.length) {
       var e = document.createElement('li'); e.className = 'cs-empty';
       e.innerHTML = lang === 'no'
