@@ -141,6 +141,7 @@ body.nav-open .lang button[aria-pressed="true"], body.nav-open #navbar.scrolled 
 .hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; display: block; filter: contrast(1.12) saturate(1.1) brightness(.95); transform-origin: 60% 30%; animation: heroIn 2.4s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes heroIn { from { transform: scale(1.12); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .hero-portrait img { animation: none; } }
+.photo-credit { position: absolute; right: .9rem; bottom: 6rem; z-index: 3; font-size: .72rem; letter-spacing: .04em; color: rgba(255,255,255,.8); text-shadow: 0 1px 4px rgba(0,0,0,.7); }
 .hero-portrait::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light; background: radial-gradient(ellipse 60% 45% at 62% 28%, rgba(255,205,130,.55), rgba(255,205,130,0) 70%), radial-gradient(ellipse 120% 90% at 55% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,.75) 100%); }
 .hero-portrait::after { content: ""; position: absolute; inset: 0; z-index: 2; background:
   linear-gradient(90deg, var(--ink) 0%, rgba(23,18,14,.65) 26%, rgba(23,18,14,0) 58%),
@@ -285,7 +286,8 @@ section.band { padding: 6.5rem 0; }
 
 /* Selected work */
 .projects { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.4rem; }
-.projects .card:first-child { grid-column: 1 / -1; }
+.projects .card p { flex: none; }
+@media (min-width: 900px) { .projects { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
 
 /* How I play */
@@ -305,6 +307,11 @@ section.band { padding: 6.5rem 0; }
 .jobs .org { color: var(--muted); font-size: .9rem; }
 .jobs .when { grid-row: 1; grid-column: 2; color: var(--muted); font-size: .85rem; font-weight: 600; white-space: nowrap; }
 @media (max-width: 600px) { .jobs li { grid-template-columns: 1fr; } .jobs .when { grid-row: auto; grid-column: 1; } }
+
+/* Watch */
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1.4rem; }
+.video { aspect-ratio: 16/9; border-radius: .5rem; overflow: hidden; background: #000; }
+.video iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* Concerts */
 .cs-group + .cs-group { margin-top: 3rem; }
@@ -377,6 +384,7 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     <ul class="nav-links" id="nav-links">
       <li><a href="#about" data-en="About" data-no="Om meg">About</a></li>
       <li><a href="#listen" data-en="Listen" data-no="Lytt">Listen</a></li>
+      <li><a href="#watch" data-en="Watch" data-no="Se">Watch</a></li>
       <li><a href="#concerts" data-en="Concerts" data-no="Konserter">Concerts</a></li>
       <li><a href="#instagram" data-en="Follow" data-no="Følg">Follow</a></li>
     </ul>
@@ -392,7 +400,7 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
 
 <main id="main">
   <section id="hero">
-    <div class="hero-portrait"><img src="portrait-hq.jpg" alt="Jazz pianist Nikolai Hansli sitting at the piano"></div>
+    <div class="hero-portrait"><img src="portrait-hq.jpg" alt="Jazz pianist Nikolai Hansli sitting at the piano"><span class="photo-credit" data-en="Photo: Joakim L. Haga / Jazz Music Norway" data-no="Foto: Joakim L. Haga / Jazz Music Norway">Photo: Joakim L. Haga / Jazz Music Norway</span></div>
     <div class="container hero-wrap">
       <div>
         <p class="eyebrow" data-en="Jazz pianist · Composer · Arranger" data-no="Jazzpianist · Komponist · Arrangør">Jazz pianist · Composer · Arranger</p>
@@ -400,7 +408,7 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
         <p class="hero-lead" data-en="From Bærum, studying jazz at NTNU in Trondheim. A personal, exploratory sound where jazz meets Norwegian folk music." data-no="Fra Bærum, student på Jazzlinja ved NTNU i Trondheim. Et personlig og utforskende uttrykk der jazz møter norsk folkemusikk.">From Bærum, studying jazz at NTNU in Trondheim. A personal, exploratory sound where jazz meets Norwegian folk music.</p>
         <div class="hero-cta">
           <a class="btn" href="#listen" data-en="Listen" data-no="Lytt">Listen</a>
-          <a class="btn btn-ghost" href="#repertoire" data-en="Selected work" data-no="Utvalgt arbeid">Selected work</a>
+          <a class="btn btn-ghost" href="#repertoire" data-en="Selected projects" data-no="Utvalgte prosjekter">Selected projects</a>
         </div>
       </div>
     </div>
@@ -415,15 +423,8 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
           <img src="portrait-hq.jpg" alt="Nikolai Hansli by the piano" loading="lazy">
         </figure>
         <div class="about-text reveal">
-          <p data-en="Nikolai Hansli (b. 2004) is a jazz pianist, composer and arranger from Bærum. He has made his mark with a personal and exploratory expression, and has played on several of the country's leading stages and festivals." data-no="Nikolai Hansli (f. 2004) er jazzpianist, komponist og arrangør fra Bærum. Han har markert seg med et personlig og utforskende uttrykk, og har spilt på flere av landets fremste scener og festivaler.">Nikolai Hansli (b. 2004) is a jazz pianist, composer and arranger from Bærum. He has made his mark with a personal and exploratory expression, and has played on several of the country's leading stages and festivals.</p>
-          <p data-en="He studies jazz at NTNU in Trondheim and was awarded the 2025 music scholarship from Bærum Kulturhus and Bærum Rotary. His music draws on jazz, folk music, gospel and meditative soundscapes." data-no="Han studerer jazz ved NTNU i Trondheim og vant i 2025 musikkstipendet fra Bærum Kulturhus og Bærum Rotary. Musikken hans henter inspirasjon fra jazz, folkemusikk, gospel og meditative klanger.">He studies jazz at NTNU in Trondheim and was awarded the 2025 music scholarship from Bærum Kulturhus and Bærum Rotary. His music draws on jazz, folk music, gospel and meditative soundscapes.</p>
-          <ul class="facts">
-            <li><b data-en="Plays" data-no="Spiller">Plays</b><span data-en="Piano & electronics" data-no="Piano og elektronikk">Piano &amp; electronics</span></li>
-            <li><b data-en="Roles" data-no="Roller">Roles</b><span data-en="Pianist, composer, arranger, bandleader" data-no="Pianist, komponist, arrangør, bandleder">Pianist, composer, arranger, bandleader</span></li>
-            <li><b data-en="Studying" data-no="Studerer">Studying</b><span>Jazz, NTNU Trondheim</span></li>
-            <li><b data-en="From" data-no="Fra">From</b><span>Bærum · 2004</span></li>
-            <li><b data-en="Inspired by" data-no="Inspirert av">Inspired by</b><span data-en="Jazz, folk, gospel" data-no="Jazz, folkemusikk, gospel">Jazz, folk, gospel</span></li>
-          </ul>
+          <p>Despite his young age and ongoing studies at the Jazz Department in Trondheim, Nikolai Hansli has already taken part in numerous musical collaborations, including projects with many prominent names in the music scene. Along the way, he has received several accolades, including the Bærum Artist Grant and the Bærum Musician Award, the latter also leading to a commissioned work for Bærum Jazz Festival.</p>
+          <p>As well as playing with different projects, Nikolai Hansli currently has a residency at Levant in Oslo, where he hosts and serves as musical director every weekend, in a cooperation with Jazz Music Norway. In addition to that, Hansli also has a monthly arrangement called «salmekveld» in Hoeggen Church in Trondheim. The concept evolves around meditative evenings where people gather to sing together, as well as listening to musical interpretations of hymns.</p>
         </div>
       </div>
     </div>
@@ -465,6 +466,16 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     </div>
   </section>
 
+  <section id="watch" class="band">
+    <div class="container">
+      <div class="section-head reveal"><h2 data-en="Watch" data-no="Se">Watch</h2></div>
+      <div class="video-grid reveal">
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/T8WSLIbUs0Q" title="Nikolai Hansli on YouTube" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <!-- second video: add another <div class="video"><iframe ...></iframe></div> here -->
+      </div>
+    </div>
+  </section>
+
   <section id="concerts" class="band">
     <div class="container">
       <div class="section-head reveal"><h2 data-en="Concerts" data-no="Konserter">Concerts</h2></div>
@@ -481,12 +492,11 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
 
   <section id="repertoire" class="band">
     <div class="container">
-      <div class="section-head reveal"><h2 data-en="Selected work" data-no="Utvalgt arbeid">Selected work</h2></div>
+      <div class="section-head reveal"><h2 data-en="Selected projects" data-no="Utvalgte prosjekter">Selected projects</h2></div>
       <div class="projects">
-        <article class="card reveal"><span class="meta">30.10.2025 · Bærum Kulturhus</span><h3>Nye røtter</h3><p data-en="Prize-winner concert and world premiere at Bærum Jazz Festival 2025. Old Norwegian folk texts combined with newly written music inspired by jazz, folk, gospel and meditative soundscapes. 75 minutes, seven musicians." data-no="Prisvinnerkonsert og urfremføring under Bærum Jazzfestival 2025. Gamle norske folketekster kombinert med egen nyskrevet musikk inspirert av jazz, folkemusikk, gospel og meditative klanger. 1 t 15 min, sju musikere.">Prize-winner concert and world premiere at Bærum Jazz Festival 2025. Old Norwegian folk texts combined with newly written music inspired by jazz, folk, gospel and meditative soundscapes. 75 minutes, seven musicians.</p><div class="tags"><span class="tag">Jazz</span><span class="tag">Folk</span><span class="tag">Original</span></div><a class="go" href="https://www.baerumkulturhus.no/arkiv/2025-host/nikolai-hansli-nye-rotter/" target="_blank" rel="noopener" data-en="Read more →" data-no="Les mer →">Read more →</a></article>
-        <article class="card reveal"><span class="meta">2025 · Bærum Kulturhus &amp; Bærum Rotary</span><h3 data-en="Music scholarship" data-no="Musikkstipend">Music scholarship</h3><p data-en="Winner of the 2025 music scholarship, awarded by a committee. It includes financial support, professional guidance and a full production together with Bærum Kulturhus." data-no="Vinner av musikkstipendet for 2025, tildelt av en komité. Stipendet gir økonomisk støtte, faglig oppfølging og en profesjonell produksjon i samarbeid med Kulturhuset.">Winner of the 2025 music scholarship, awarded by a committee. It includes financial support, professional guidance and a full production together with Bærum Kulturhus.</p></article>
-        <article class="card reveal"><span class="meta" data-en="Ensemble" data-no="Besetning">Ensemble</span><h3 data-en="The “Nye røtter” band" data-no="Bandet i «Nye røtter»">The “Nye røtter” band</h3><p>Siv Aurlund (vokal) · Mads Lundh Kristiansen (tenorsaksofon) · Lars Viljo Fauske (fiolin) · Rebekka Hansli (fiolin) · Bendik Løland Lundsvoll (kontrabass) · Erik Wie Flaig (trommer)</p></article>
-<article class="card reveal"><span class="meta" data-en="Ensemble" data-no="Besetning">Ensemble</span><h3>Hansli Endurance</h3></article>        <article class="card reveal"><span class="meta" data-en="Ensemble" data-no="Besetning">Ensemble</span><h3>Nikolai Hansli Quartet</h3></article>
+        <article class="card reveal"><h3>Hansli’s Endurance</h3><p>Hansli’s Endurance brings together four individual voices that push the music forward into improvised passages that have never been played before. The band focuses on an overflowing energy that carries the phrases and shapes the music.<br><br>The sound combines hard bop, gospel, blues, meditative music, and the energetic spirit of the avant-garde and the great John Coltrane.<br><br>They strive for a rawness in the music, an energy that at times can become gritty and serious, but that can also create a sense of calm, hope, and meditative reflection.<br><br>The band released their first album the summer of 2026, while the second album is expected in 2027.</p></article>
+        <article class="card reveal"><h3>Nikolai Hansli: Nye Røtter</h3><p>This project brings together both familiar and lesser-known traditional Norwegian folk texts and songs, weaving them into newly composed original music.<br><br>With humility and curiosity, the band seeks to create a thread of connection and dialogue between ancient traditions and a fresh, personal interpretation.<br><br>Drawing inspiration from a wide range of musical worlds, including blues, jazz, gospel, sacred music, meditative music, and folk traditions themselves, the band creates a unique sonic landscape and an atmosphere that invites interactive spontaneity.<br><br>The project was originally commissioned by Bærum Jazz Festival, and the band’s debut album is expected in 2027.</p></article>
+        <article class="card reveal"><h3>Nikolai Hansli Quartet</h3><p>This project is the oldest band out of all the active Nikolai Hansli bands. The quartet is a Norwegian/Danish jazz quartet, playing original music. The band conveys lyrical music, and tries to unite melancholy and seriousness with hope and devotion.<br><br>In 2025, the band went on a successful tour, and there is more to come in 2027.</p></article>
       </div>
     </div>
   </section>
@@ -580,13 +590,6 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     ['D.S. al Coda', 'Go back to the sign, then to the coda'], ['N.C.', 'No chord'], ['8va', 'Play an octave higher'],
     ['rit.', 'Slow down gradually'], ['F♯ø7', 'Half-diminished seventh'], ['I–vi–ii–V', 'Rhythm changes turnaround'], ['%', 'Repeat the previous bar']
   ];
-  $$('.card').forEach(function (card, ci) {
-    ['tl', 'tr', 'bl', 'br'].forEach(function (pos, k) {
-      var g = G[(ci * 5 + k * 7 + ci) % G.length], s = document.createElement('span');
-      s.className = 'cg ' + pos; s.textContent = g[0]; s.title = g[1]; s.setAttribute('aria-hidden', 'true');
-      card.appendChild(s);
-    });
-  });
 })();
 </script>
 
@@ -742,21 +745,11 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     var day = document.createElement('b'); day.textContent = d.getDate();
     var mon = document.createElement('span'); mon.textContent = d.toLocaleDateString(loc, { month: 'short', year: 'numeric' }).replace('.', '');
     date.appendChild(day); date.appendChild(mon);
-    if (c.time) { var tm = document.createElement('i'); tm.textContent = c.time; date.appendChild(tm); }
     var info = document.createElement('div'); info.className = 'cs-info';
     var h = document.createElement('h4'); h.textContent = c.title;
-    if (c.tag) { var tg = document.createElement('span'); tg.className = 'cs-tag'; tg.textContent = c.tag; h.appendChild(tg); }
-    var v = document.createElement('p'); v.className = 'cs-venue'; v.textContent = c.venue + (c.city ? ', ' + c.city : '');
+    var v = document.createElement('p'); v.className = 'cs-venue'; v.textContent = c.venue;
     info.appendChild(h); info.appendChild(v);
-    var note = pick(c.note, lang);
-    if (note) { var n = document.createElement('p'); n.className = 'cs-note'; n.textContent = note; info.appendChild(n); }
     li.appendChild(date); li.appendChild(info);
-    if (c.link) {
-      var act = document.createElement('div'); act.className = 'cs-action';
-      var a = document.createElement('a'); a.className = 'btn btn-dark'; a.href = c.link; a.target = '_blank'; a.rel = 'noopener';
-      a.textContent = pick(c.linkLabel, lang) || (lang === 'no' ? 'Mer info' : 'More info');
-      act.appendChild(a); li.appendChild(act);
-    }
     return li;
   }
   function render() {
