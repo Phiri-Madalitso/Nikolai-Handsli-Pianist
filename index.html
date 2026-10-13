@@ -342,6 +342,9 @@ section.band { padding: 6.5rem 0; }
 
 /* Past concerts by year */
 .cs-sub { margin: -.4rem 0 1.2rem; color: var(--muted); font-size: .95rem; }
+.cs-search { width: 100%; max-width: 30rem; margin: 0 0 1.2rem; padding: .75rem 1.1rem; font: inherit; font-size: .95rem; color: var(--ink); background: rgba(255,255,255,.6); border: 1px solid var(--line); border-radius: 999px; outline: none; transition: border-color .3s var(--ease), background-color .3s var(--ease); }
+.cs-search:focus { border-color: var(--accent); background: #fff; }
+.cs-nomatch { padding: 1.4rem .4rem; color: var(--muted); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
 .cs-year { border-top: 1px solid var(--ink); }
 .cs-year:last-child { border-bottom: 1px solid var(--ink); }
 .cs-year summary { list-style: none; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem .4rem; cursor: pointer; font-family: var(--font-brand); font-size: 1.6rem; color: var(--ink); }
@@ -505,6 +508,7 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
       <div class="cs-group reveal" id="cs-past">
         <h3 class="cs-title"><span data-en="Past" data-no="Tidligere">Past</span></h3>
         <p class="cs-sub" id="cs-past-sub"></p>
+        <input type="search" class="cs-search" id="cs-search" data-ph-en="Search past concerts: artist, venue, festival…" data-ph-no="Søk i tidligere konserter: artist, sted, festival…" placeholder="Search past concerts: artist, venue, festival…" aria-label="Search past concerts" autocomplete="off">
         <div id="cs-past-list"></div>
       </div>
     </div>
@@ -758,7 +762,8 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
       upG = document.getElementById('cs-upcoming'), pastG = document.getElementById('cs-past');
   if (!upL) return;
   var moreBtn = document.getElementById('cs-upcoming-more'), pastSub = document.getElementById('cs-past-sub'),
-      showAllUp = false, openYears = {};
+      showAllUp = false, openYears = {}, searchEl = document.getElementById('cs-search'), q = '';
+  searchEl.addEventListener('input', function () { q = searchEl.value.trim().toLowerCase(); render(); });
   moreBtn.addEventListener('click', function () { showAllUp = !showAllUp; render(); });
   function pick(v, lang) { return v && typeof v === 'object' ? (v[lang] || v.en || '') : (v || ''); }
   function make(c, lang, past) {
@@ -789,6 +794,9 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
       moreBtn.textContent = showAllUp ? (no ? 'Vis færre' : 'Show fewer')
         : (no ? 'Vis alle ' + up.length + ' kommende konserter' : 'Show all ' + up.length + ' upcoming concerts');
     } else moreBtn.hidden = true;
+    var total = past.length, all = past.slice();
+    searchEl.placeholder = searchEl.getAttribute(no ? 'data-ph-no' : 'data-ph-en');
+    if (q) past = past.filter(function (c) { return (c.title + ' ' + c.venue).toLowerCase().indexOf(q) !== -1; });
     var years = [];
     past.forEach(function (c) {
       var y = c.date.slice(0, 4), g = years[years.length - 1];
@@ -797,16 +805,21 @@ footer { overflow: hidden; background: #0c0907; color: rgba(255,255,255,.65); pa
     });
     years.forEach(function (g, i) {
       var det = document.createElement('details'); det.className = 'cs-year'; det.dataset.y = g.y;
-      det.open = openYears[g.y] !== undefined ? openYears[g.y] : i === 0;
-      det.addEventListener('toggle', function () { openYears[g.y] = det.open; });
+      det.open = q ? true : (openYears[g.y] !== undefined ? openYears[g.y] : i === 0);
+      det.addEventListener('toggle', function () { if (!q) openYears[g.y] = det.open; });
       var sum = document.createElement('summary');
       sum.innerHTML = '<span>' + g.y + '<small>' + g.items.length + (no ? ' konserter' : ' concerts') + '</small></span>';
       var ul = document.createElement('ul'); ul.className = 'cs-list';
       g.items.forEach(function (c) { ul.appendChild(make(c, lang, true)); });
       det.appendChild(sum); det.appendChild(ul); pastL.appendChild(det);
     });
-    pastSub.textContent = no ? past.length + ' konserter siden ' + (years.length ? years[years.length - 1].y : '')
-      : past.length + ' concerts since ' + (years.length ? years[years.length - 1].y : '');
+    if (q && !past.length) {
+      var nm = document.createElement('p'); nm.className = 'cs-nomatch';
+      nm.textContent = no ? 'Ingen treff.' : 'No matches.'; pastL.appendChild(nm);
+    }
+    var since = all.length ? all[all.length - 1].date.slice(0, 4) : '';
+    pastSub.textContent = q ? past.length + (no ? ' av ' : ' of ') + total + (no ? ' konserter' : ' concerts')
+      : total + (no ? ' konserter siden ' : ' concerts since ') + since;
     if (!up.length) {
       var e = document.createElement('li'); e.className = 'cs-empty';
       e.innerHTML = lang === 'no'
